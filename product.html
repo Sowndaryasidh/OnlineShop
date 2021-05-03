@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Online Shopping App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    body{
+      background-image: url("{% static 'dress/images/backgroundimage.jpg' %}") ;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-light" style="background-color:#e6ebe7;">
+    <a href="#" class="navbar-brand" style="background-color:#FFCC33;
+    color:#000000;border-width:10px;border-color:#FFCC33;border-style:solid;border-spacing:30px;border-radius: 5px;">Dress Store App</a>
+    <a class="navbar-link btn-lg" href="{% url 'index' %}" style="background-color:#FFCC33;color:#000000;">Trendster Collections</a>
+<a href="{% url 'admin:index' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33;color:#000000;">Admin</a>
+    <a href="{% url 'upload-dress' %}" class="navbar-link btn-lg" style="background-color:#FFCC33;color:#000000;">Upload-dress</a>
+</nav>
+<br>
+{% block content %}
+<div class="card-columns">
+    {% for dress in dress_shelf %}
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{ dress.picture.url }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ dress.name }}</h5>
+    <p class="card-text">{{ dress.description }}</p>
+   <div class="card-footer bg-transparent border-dark">
+   <p class="card-title">{{dress.price}}</p>
+   <center>
+       <a href="update/{{dress.id}}" class="btn btn-warning" id = '{{dress.id}}'>update</a>
+       <a class="nav-link" href="buynow">buynow</a>
+    </center>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
